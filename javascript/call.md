@@ -1,6 +1,7 @@
 call apply bind
 ----
-this指向调用方法的对象，而call() apply() bind()() 可以改变this的指向<br>
+this指向调用方法的对象，而call() apply() bind()() 可以改变this的指向
+
     bind 返回的是一个新的函数，你必须调用它才会被执行
     call 、bind 、 apply 这三个函数的第一个参数都是 this 的指向对象，第二个参数差别就来了：
     call 的参数是直接放进去的，第二第三第 n 个参数全都用逗号分隔，直接放到后面 obj.myFun.call(db,'成都', ... ,'string' )。
