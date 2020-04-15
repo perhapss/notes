@@ -5,6 +5,7 @@ v-bind: => :
 v-on: => @
 ### binding class
 :class="{active: variableName}"
+
 :class="[{active: variableName}]"
 
 v-html="" //banging html content
