@@ -1,13 +1,47 @@
 binding data
 ===
 {{data}}
-v-bind: => :
-v-on: => @
 ### binding class
 :class="{active: variableName}"
 
 :class="[{active: variableName}]"
 
+    绑定数据中可以用调用方法 返回值
+
+v-text:  //绑定内容
+
 v-html="" //banging html content
 
-    绑定数据中可以用调用方法 返回值
+v-show="" //相当于在节点上加了"display: none"
+
+v-if=""  //会引起页面重绘
+
+v-else-if=""
+
+v-else  //上一个节点必须有 v-if 或 v-else-if
+```html
+  <ul>
+    <li v-for="(item, index) in arr" :key="item"></li>
+  </ul>
+  <ul>
+    <li v-for="(val, key, index) in obj" :key="key"></li>
+  </ul>
+```
+v-bind: => :
+
+v-on: => @  //绑定事件
+
+v-model=""  //双向绑定  用在input上
+
+*修饰符*
+v-model.number="" //会将输入的值转换成number
+
+v-model.trim="" //去除首尾的空格
+
+v-model.lazy="" //将input事件变为change事件
+
+v-pre  //内容不会解析
+
+v-cloak //现在用不到了
+
+
