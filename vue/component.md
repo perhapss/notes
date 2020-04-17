@@ -16,3 +16,34 @@
         }
     }
 ```
+### extend //继承
+```javascript
+    import Vue from 'vue'
+    const NewHeader = Vue.extend(PageHeader)
+    new NewHeader({
+        el: '#root',
+        propsData: { //此时需要用propsData才能拿到
+          propsOne: 'xxx' 
+        },
+        data: {
+          text: '123'
+        }
+    })
+```
+```javascript
+    import PageHeader from '../../layout/page-header.vue'
+    const HeaderTwo = {
+        extends: PageHeader,
+        props: {
+          propsTest: {
+            type: String,
+            default: "props text"
+          }
+        },
+        data (){
+          return {
+            logoText: "123"
+          }
+        }
+    }
+```
