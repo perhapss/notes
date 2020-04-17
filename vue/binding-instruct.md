@@ -44,7 +44,7 @@ v-pre  //内容不会解析
 
 v-cloak //现在用不到了
 
-# $parent
+### $parent
 ```javascript
     this.$parent.$options.name //父组件的name会转化成$options里面的东西
     this.$parent.text = "xxx" //可以在子组件中改变父组件的值
