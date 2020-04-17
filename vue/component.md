@@ -47,3 +47,29 @@
         }
     }
 ```
+### slot
+```javascript
+{ //父组件
+    template: `
+        <comp>
+          <div slot="header">this is header</div>
+          <div slot="cont" slot-scope="props">this is {{props.text}}</div>
+        </comp>
+    `
+}
+{ //子组件
+    data(){
+        return {
+          text: "cont"
+        }
+    },
+    template: `
+        <div>
+          <slot name="header"></slot>
+          <slot name="cont" :text="text"></slot>
+        </div>
+    `
+}
+```
+        slot添加name属性成为具名插槽
+        作用域插槽组件在引用是写在里面的变量是跟随引用这个组件的父组件里面的变量值，若想用到子组件里面的值，则在引用组件里面加slot-scope=""指令
