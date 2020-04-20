@@ -1,2 +1,60 @@
 router
 ===
+```javascript
+export default new Router({
+  mode: 'history',
+  routes: routes
+})
+export default () => { //需要服务器渲染时，要export一个function，不然每次export的都是同一个router会造成内存溢出
+  return new Router({
+    mode: 'history', //有hash和history两种模式
+    routes: routes,
+    base: 'base', //用vue-router跳转时都会给链接前面加一个'/base'，不强制，链接中没有也可以访问
+    linkActiveClass: '', //用router-link跳转时，会给当前页面路径匹配的层级页面都加上设置的class 'router-link-active'(默认)
+    linkExactActiveClass: '', //用router-link跳转时，会给当前页面路径完全匹配的标签上加上设置的class 'router-link-exact-active'(默认)
+    scrollBehavior (to, from, savedPosition) { //记录之前访问过的当前页面滚动的位置
+      if(savedPosition){
+        return savedPosition
+      }else{
+        retrun {x: 0, y: 0}
+      }
+    },
+    parseQuery (query) { //链接中的参数在query中，此方法把字符串转化为json
+    
+    },
+    stringifyQuery (obj) { //此方法把obj转化为字符串
+    
+    },
+    fallback: true, //默认为true, 不是所有的浏览器都支持这种'history'形式的路由方式，这时就会自动转化成'hash'的方式
+  })
+}
+const routes = [
+  {
+    path: '/',
+    redirect: '/login' //改变路径
+  },
+  {
+    path: '/',
+    component: 'Login',
+    name: 'login', //命名
+    meta: { //页面的源信息，用于SEO
+      title: 'this is app',
+      description: ''
+    },
+    children: [
+      {
+        path: 'details', // 要注意，以 / 开头的嵌套路径会被当作根路径。 这让你充分的使用嵌套组件而无须设置嵌套的路径。
+        component: 'Details'
+      }
+    ]
+  }
+]
+```
+```html
+  <router-link to="/login"></router-link>
+  <router-link :to="{name: 'login'}"></router-link>  <!-- 给路由命名的跳转 -->
+```
+### 跳转路由
+* this.$router.push() //跳转到不同的url，但这个方法会向history栈添加一个记录，点击后退会返回到上一个页面。
+* this.$router.replace() //同样是跳转到指定的url，但是这个方法不会向history里面添加新的记录，点击返回，会跳转到上上一个页面。上一个记录是不存在的。
+* this.$router.go(n) //相对于当前页面向前或向后跳转多少个页面,类似 window.history.go(n)。n可为正数可为负数。正数返回上一个页面
