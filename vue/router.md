@@ -58,3 +58,23 @@ const routes = [
 * this.$router.push() //跳转到不同的url，但这个方法会向history栈添加一个记录，点击后退会返回到上一个页面。
 * this.$router.replace() //同样是跳转到指定的url，但是这个方法不会向history里面添加新的记录，点击返回，会跳转到上上一个页面。上一个记录是不存在的。
 * this.$router.go(n) //相对于当前页面向前或向后跳转多少个页面,类似 window.history.go(n)。n可为正数可为负数。正数返回上一个页面
+> 可以用一个transition标签包裹住route-view，做切换页面的动画
+### 传参
+```javascript
+  //router
+    {
+      path: '/login/:id',
+      // props: true, //声明后就可以在组件中用props: ['id']获取到参数
+      // props: { //声明一个对象
+      //   id: 123
+      // },
+      props: (route) => (id: route.query.a) //声明一个方法，route和在组件内部拿到的this.$toute是同一个内容
+      
+    }
+  //html
+    <router-link to="/login/123"></router-link>
+  //js
+  this.$route //当前路由的信息 this.$route.params.id就是我们传人的参数
+  在链接中?后面跟的参数在this.$route.query中
+```
+> 当组件中用了this.$route时就不能作为一个公用的组件来用，只能成为router中的一个component
