@@ -78,3 +78,61 @@ const routes = [
   在链接中?后面跟的参数在this.$route.query中
 ```
 > 当组件中用了this.$route时就不能作为一个公用的组件来用，只能成为router中的一个component
+### 命名router-view
+```javascript
+  //template
+    <router-view name="a" />
+  //router
+    {
+      path: '',
+      components: { //当有多个路由时(router-view)，用components
+        default: '',  //没有命名的默认路由传入组件
+        a: '', //命名为a的路由传入组件
+      }
+    }
+```
+### 导航守卫
+```javascript
+  //设置在全局
+  router.beforeEach((to, from, next) => {
+    //to.fullPath
+    next(); //需要执行next方法才会跳转路由, next('/login'), 也可以传入一个对象，和在router里面的一样 next({path: '/login'})
+  })
+  router.beforeResolve((to, from, next) => {
+    next();
+  })
+  router.afterEach((to, from) => {
+    
+  })
+  //设置在路由配置  router
+  {
+    beforeEnter (to, from, next) {
+      next(); //调用顺序在全局的beforeEach和beforeResolve之间
+    }
+  }
+  //在组件内部
+  beforeRouteEnter (to, from, next) {
+    // next(); ////调用顺序在路由配置的beforeEnter和全局的beforeResolve之间
+    //此时拿不到 组件的数据 this, 用下面方法拿到
+    next( vm => {
+      //vm.id
+    })
+  },
+  beforeRouteUpdate (to, from, next) {
+    next(); //同一个组件在不同的路由下面都是用这个组件去显示的时候才会触发， 例：'/app:id'，
+    //如果页面数据要根据传入的id去变化时就可以在这里操作， 否则要用watch
+  },
+  beforeRouteLeave (to, from, next) {
+    next(); //最先触发
+  }
+```
+### 异步路由
+    在首屏加载时速度会更快
+```javascript
+  {
+    path: '/login',
+    component: () => import('@/views/login/login')
+  }
+  //使用这种方法需要安装一个插件，npm i babel-plugin-syntax-dynamic-import -D
+  //.babellic 里的plugin要添加 'syntax-dynamic-import'
+```
