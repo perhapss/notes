@@ -1,7 +1,7 @@
 vuex
 ===
+### store
 ```javascript
-//store
 import Vuex from 'vuex'
 
 import defaultState from './state/state'
@@ -15,27 +15,37 @@ export default ()=>{ //做服务端渲染的话就需要每次新生成一个sto
     strict: isDev, //禁止在component中修改state的值，只在生产环境使用这个配置
     state: defaultState,
     mutations,
-    getters, //生成一些可以在应用中直接使用的数据，统一
-    actions, //用于有异步修改数据的操作
+    getters, 
+    actions
   })
 }
-//state
+```
+### state
+```javascript
 export default {
   pageIndex: 0
 }
-//mutations
+```
+### mutations
+```javascript
 export default{
   updatePage (state, num) { //只有两个参数，若传入值为多个是转换成一个对象
     state.pageIndex = num
   }
 }
-//getters
+```
+### getters
+> 生成一些可以在应用中直接使用的数据，统一
+```javascript
 export default{
   fullName (state) {
     return `${state.firstName} ${state.lastName}`
   }
 }
-//actions 
+```
+### actions 
+> 用于有异步修改数据的操作
+```javascript
 export default{
   updatePageAsync (store, data) { //只有两个参数，若传入值为多个是转换成一个对象
     setTimeout(() => {
@@ -43,7 +53,9 @@ export default{
     }, data.time)
   }
 }
-//component
+```
+### component
+```javascript
 computed: {
   pageIndex () {
     return this.$store.state.pageIndex  //获取到store的state值，也可以在组件中直接给pageIndex赋值，但不推荐这样做
