@@ -71,3 +71,31 @@ this.$store.dispatch('updatePageAsync', { //调用store的actions中的方法
 })
 this.$store.commit('updatePage', num)  //调用store的mutations中的方法
 ```
+### modules
+```javascript
+//store
+modules: {
+  a: {
+    namespaced: true, //声明后mutation就只在当前模块，各模块之间就可以有相同的命名
+    state: {
+      text: 1  //this.$store.state.a.text 调用
+    }，
+    mutation: { 
+      updateText(state， text){ //this.$store.commit('updateText', num) 默认vuex会把mutation放到全局的命名空间中
+        state.text = text
+      }
+    },
+    getters: {
+      textPlus (state, getter, rootState) { 
+        //第二个参数是所有的getter方法, 第三个参数是全局的state, return this.$store.getters.textPlus
+        return state.text + 1
+      }
+    }
+  },
+  b: {
+    state: {
+      text: b
+    }
+  }
+}
+```
