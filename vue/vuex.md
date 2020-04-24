@@ -90,6 +90,12 @@ modules: {
         //第二个参数是所有的getter方法, 第三个参数是全局的state, return this.$store.getters.textPlus
         return state.text + 1
       }
+    },
+    actions: {
+      add({state, commit, rootState}) {
+        commit('updatePage', rootState.pageIndex, {root: true})
+        //加入{root: true}代表调用的是全局的mutations, 因为有namespaced 的限制，不然可以不加
+      }
     }
   },
   b: {
