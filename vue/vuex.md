@@ -105,3 +105,29 @@ modules: {
   }
 }
 ```
+### store的热更替
+```javascript
+export default ()=>{
+  const store = new Vuex.Store({
+    strict: isDev,
+    state: defaultState,
+    mutations
+  });
+  // store 的热更替
+  if (module.hot) {
+    module.hot.accept([
+      './state/state',
+      './mutations/mutations'
+    ], () => {
+      newState = require('./state/state').default;
+      newMutations = require('./mutations/mutations').default;
+
+      store.hotUpdate({
+        state: newState,
+        mutations: newMutations
+      })
+    })
+  }
+  return store
+}
+```
