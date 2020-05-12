@@ -2,13 +2,15 @@ object
 ===
 ### 属性的遍历
 * for...in
+
         for...in循环遍历对象自身的和继承的可枚举属性（不含 Symbol 属性）。
         
 * Object.keys(obj)
+
         Object.keys返回一个数组，包括对象自身的（不含继承的）所有可枚举属性（不含 Symbol 属性）的键名。
         
 * Object.getOwnPropertyNames(obj)
-/n
+
         Object.getOwnPropertyNames返回一个数组，包含对象自身的所有属性（不含 Symbol 属性，但是包括不可枚举属性）的键名。
         
 * Object.getOwnPropertySymbols(obj)
@@ -18,3 +20,6 @@ object
 * Reflect.ownKeys(obj)
 
         Reflect.ownKeys返回一个数组，包含对象自身的所有键名，不管键名是 Symbol 或字符串，也不管是否可枚举。
+### super 关键字
+        指向当前对象的原型对象。super.foo等同于Object.getPrototypeOf(this).foo（属性）
+        或Object.getPrototypeOf(this).foo.call(this)（方法）。但是绑定的this却还是当前对象obj
