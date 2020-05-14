@@ -58,3 +58,24 @@ NaN === NaN // false
 Object.is(+0, -0) // false
 Object.is(NaN, NaN) // true
 ```
+### Object.assign()
+        Object.assign方法用于对象的合并，将源对象（source）的所有可枚举属性，复制到目标对象（target）。
+        Object.assign方法的第一个参数是目标对象，后面的参数都是源对象。
+* 浅拷贝
+* 同名属性的替换
+* 数组的处理 会把数组视为对象。
+* 取值函数的处理 只能进行值的复制，如果要复制的值是一个取值函数，那么将求值后再复制。
+#### 常规用途
+* 为对象添加属性
+* 为对象添加方法
+* 克隆对象
+* 合并多个对象
+* 为属性指定默认值
+### Object.getOwnPropertyDescriptors()
+返回指定对象所有自身属性（非继承属性）的描述对象
+### Object.keys() Object.values() Object.entries()
+* Object.keys方法，返回一个数组，成员是参数对象自身的（不含继承的）所有可遍历（enumerable）属性的键名。
+> Object.values方法返回一个数组，成员是参数对象自身的（不含继承的）所有可遍历（enumerable）属性的键值。
+> Object.entries()方法返回一个数组，成员是参数对象自身的（不含继承的）所有可遍历（enumerable）属性的键值对数组。
+ ### Object.fromEntries() 
+ > Object.fromEntries()方法是Object.entries()的逆操作，用于将一个键值对数组转为对象。
