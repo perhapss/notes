@@ -14,4 +14,7 @@ Boolean(sym) // true
 ### 作为属性名的 Symbol
 Symbol 值作为对象属性名时，不能用点运算符。
 ### Symbol.for()，Symbol.keyFor() 
-它接受一个字符串作为参数，然后搜索有没有以该参数作为名称的 Symbol 值。如果有，就返回这个 Symbol 值，否则就新建一个以该字符串为名称的 Symbol 值，并将其注册到全局。
+    Symbol.for() 它接受一个字符串作为参数，然后搜索有没有以该参数作为名称的 Symbol 值。
+    如果有，就返回这个 Symbol 值，否则就新建一个以该字符串为名称的 Symbol 值，并将其注册到全局。
+    
+    Symbol.keyFor()方法返回一个已登记的 Symbol 类型值的key。
